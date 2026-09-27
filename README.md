@@ -1,6 +1,6 @@
-# cookiecutter-mcp-server
+# `cookiecutter-fastmcp`
 
-[![CI Pipeline](https://github.com/deathlabs/cookiecutter-mcp-server/actions/workflows/ci.yaml/badge.svg)](https://github.com/deathlabs/cookiecutter-mcp-server/actions/workflows/ci.yaml)
+[![CI Pipeline](https://github.com/deathlabs/cookiecutter-fastmcp/actions/workflows/ci.yaml/badge.svg)](https://github.com/deathlabs/cookiecutter-fastmcp/actions/workflows/ci.yaml)
 
 A Cookiecutter template for creating Python MCP servers with Microsoft's [Agent Governance Toolkit (AGT)](https://github.com/microsoft/agent-governance-toolkit) built in. The template includes skills, tools, and an AGT policy so you can see how the pieces work together and adapt them for your own MCP server. The template also includes two optional Codex configuration files. `.codex/config.toml` connects Codex to the MCP server, and `.codex/agents/knowledge-manager.toml` defines a sample agent that uses its tools. You should replace AGT policy, skills, and tools with ones suited to your project.
 
@@ -15,7 +15,7 @@ The instructions below assume you are using VS Code and OpenAI's Codex agent. Th
 **Step 1.** Run Cookiecutter against the GitHub repository.
 
 ```bash
-cookiecutter https://github.com/deathlabs/cookiecutter-mcp-server.git
+cookiecutter https://github.com/deathlabs/cookiecutter-fastmcp.git
 ```
 
 When prompted, either accept the default values or provide your own.
@@ -57,13 +57,13 @@ make
 **Step 1.** Clone the repository.
 
 ```bash
-git clone https://github.com/deathlabs/cookiecutter-mcp-server.git
+git clone https://github.com/deathlabs/cookiecutter-fastmcp.git
 ```
 
 **Step 2.** Change to the repository directory.
 
 ```bash
-cd cookiecutter-mcp-server
+cd cookiecutter-fastmcp
 ```
 
 **Step 3.** Use the Makefile to create, start, and test an example MCP server. The Makefile places the created MCP server in the `build` folder, in a subfolder named after the server.
