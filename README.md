@@ -2,7 +2,7 @@
 
 [![CI Pipeline](https://github.com/deathlabs/cookiecutter-fastmcp/actions/workflows/ci.yaml/badge.svg)](https://github.com/deathlabs/cookiecutter-fastmcp/actions/workflows/ci.yaml)
 
-A Cookiecutter template for creating Python MCP servers with Microsoft's [Agent Governance Toolkit (AGT)](https://github.com/microsoft/agent-governance-toolkit) built in. The template includes skills, tools, and an AGT policy so you can see how the pieces work together and adapt them for your own MCP server. The template also includes two optional Codex configuration files. `.codex/config.toml` connects Codex to the MCP server, and `.codex/agents/knowledge-manager.toml` defines a sample agent that uses its tools. You should replace AGT policy, skills, and tools with ones suited to your project.
+A Cookiecutter template for creating FastMCP servers with Microsoft's [Agent Governance Toolkit (AGT)](https://github.com/microsoft/agent-governance-toolkit) built in. The template includes skills, tools, and an AGT policy so you can see how the pieces work together and adapt them for your own MCP server. The template also includes two optional Codex configuration files. `.codex/config.toml` connects Codex to the MCP server, and `.codex/agents/knowledge-manager.toml` defines a sample agent that uses its tools. You should replace AGT policy, skills, and tools with ones suited to your project.
 
 ## Quickstart
 
@@ -147,7 +147,5 @@ In the logs, you should also see an entry that looks like below.
 To stop your MCP server and delete its container image, enter the commands below.
 
 ```bash
-make stop-container
-make remove-container
-make remove-container-image
+make clean
 ```

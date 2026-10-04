@@ -7,8 +7,8 @@ Security advisories are documented using the Vulnerability Exploitability eXchan
 Each advisory identifies the vulnerability being assessed, the associated product (e.g., Python package), its current status (one of `not_affected`, `affected`, `fixed`, or `under_investigation`), and the rationale supporting that status. When a vulnerability is determined to be `not_affected`, the advisory includes a justification and an impact statement describing why we believe the vulnerability is not exploitable within the context of this project.
 
 For information about the latest security advisories for this project, please refer to the following:
-* [src/vex.yaml](src/vex.yaml)
+* [mcp-server/vex.yaml](mcp-server/vex.yaml)
 
 ## Reporting a Vulnerability
 
-To report a security issue, please use https://github.com/orgs/deathlabs/discussions/new?category=security. We will do our best to respond to reports within 7 business days.
+To report a security issue, please use https://github.com/orgs/{{ cookiecutter.github_organization }}/discussions/new?category=security. We will do our best to respond to reports within 7 business days.
