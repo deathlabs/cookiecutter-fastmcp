@@ -20,7 +20,7 @@ export COMPOSE_BAKE := true
 DOCKER_COMPOSE_PROFILE ?= all
 
 # Set Docker build context and image reference.
-BUILD_CONTEXT := src
+BUILD_CONTEXT := mcp-server
 DOCKERFILE_PATH :=$(BUILD_CONTEXT)/Dockerfile
 IMAGE_REF := {{ cookiecutter.project_slug }}/mcp:latest
 CONTAINER_NAME := {{ cookiecutter.project_slug }}_mcp
@@ -59,7 +59,7 @@ validate-workspace:
 .SILENT: lock
 lock:
 	echo "[*] Locking {{ cookiecutter.project_slug }} Python dependencies"
-	cd $(BUILD_CONTEXT) && uv lock
+	cd $(BUILD_CONTEXT)/{{ cookiecutter.project_slug }} && uv lock
 
 # ---------------------------------------------------------
 # Check the source code for quality.
@@ -69,7 +69,7 @@ lock:
 .SILENT: check
 check:
 	echo "[*] Checking {{ cookiecutter.project_slug }}'s source code quality"
-	ruff check --fix $(BUILD_CONTEXT)
+	ruff check --fix $(BUILD_CONTEXT)/{{ cookiecutter.project_slug }}
 
 # ---------------------------------------------------------
 # Format the source code.
@@ -79,7 +79,7 @@ check:
 .SILENT: format
 format:
 	echo "[*] Formatting {{ cookiecutter.project_slug }}'s source code"
-	ruff format $(BUILD_CONTEXT)
+	ruff format $(BUILD_CONTEXT)/{{ cookiecutter.project_slug }}
 
 # ---------------------------------------------------------
 # Check the repository for secrets.
@@ -95,7 +95,7 @@ secrets:
 		--fail-on-scan-errors \
 		--results=verified,unknown \
 		--log-level=-1 \
-		--exclude-paths src/trufflehog-exclusions.txt \
+		--exclude-paths $(BUILD_CONTEXT)/trufflehog-exclusions.txt \
 		"$(MCP_SERVER_WORKSPACE)"
 
 # ---------------------------------------------------------
@@ -231,7 +231,7 @@ test-container: start-container
 .PHONY: stop-container
 .SILENT: stop-container
 stop-container:
-	docker container stop ${CONTAINER_NAME}
+	docker container stop ${CONTAINER_NAME} || true
 
 # ---------------------------------------------------------
 # Remove the container.
@@ -240,7 +240,7 @@ stop-container:
 .PHONY: remove-container
 .SILENT: remove-container
 remove-container:
-	docker container rm ${CONTAINER_NAME}
+	docker container rm ${CONTAINER_NAME} || true
 
 # ---------------------------------------------------------
 # Remove the container image.
@@ -249,4 +249,12 @@ remove-container:
 .PHONY: remove-container-image
 .SILENT: remove-container-image
 remove-container-image:
-	docker image rm ${IMAGE_REF}
+	docker image rm ${IMAGE_REF} || true
+
+# ---------------------------------------------------------
+# Purge the container and its container image.
+# ---------------------------------------------------------
+
+.PHONY: clean
+.SILENT: clean
+clean: stop-container remove-container remove-container-image

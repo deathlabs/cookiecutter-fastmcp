@@ -1,14 +1,14 @@
 FROM alpine:3.24
 LABEL image.authors="{{ cookiecutter.author }}"
 WORKDIR /home/{{ cookiecutter.project_slug }}/
-COPY pyproject.toml pyproject.toml
-COPY main.py main.py
-COPY policy.yaml policy.yaml
-COPY skills/ skills/
-COPY tools/ tools/
-COPY uv.lock uv.lock
+COPY {{ cookiecutter.project_slug }}/pyproject.toml pyproject.toml
+COPY {{ cookiecutter.project_slug }}/main.py main.py
+COPY {{ cookiecutter.project_slug }}/policy.yaml policy.yaml
+COPY {{ cookiecutter.project_slug }}/skills/ skills/
+COPY {{ cookiecutter.project_slug }}/tools/ tools/
+COPY {{ cookiecutter.project_slug }}/uv.lock uv.lock
 ENV UV_PYTHON_INSTALL_DIR=/home/{{ cookiecutter.project_slug }}/.uv-python
-RUN apk add --no-cache python3=3.14.7-r1 uv=0.11.19-r0 && \
+RUN apk add --no-cache python3=3.14.8-r0 uv=0.11.19-r0 && \
     apk upgrade --no-cache libcrypto3 libssl3 &&\
     uv sync --frozen --python /usr/bin/python3 && \
     addgroup -g 1000 {{ cookiecutter.project_slug }} &&\

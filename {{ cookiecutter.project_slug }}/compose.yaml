@@ -2,7 +2,7 @@ services:
 
   {{ cookiecutter.project_slug }}:
     profiles: [all]
-    build: src
+    build: mcp-server
     image: {{ cookiecutter.project_slug }}/mcp:latest
     container_name: {{ cookiecutter.project_slug }}_mcp
     ports:
